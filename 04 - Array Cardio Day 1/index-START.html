@@ -35,32 +35,78 @@
       'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
+
+    const boulevards = ["Boulevards of Paris","City walls of Paris","Thiers wall","Wall of Charles V","Wall of Philip II Augustus","City gates of Paris",
+    "Haussmann's renovation of Paris","Boulevards of the Marshals","Boulevard Auguste-Blanqui","Boulevard Barbès","Boulevard Beaumarchais","Boulevard de l'Amiral-Bruix",
+    "Boulevard Mortier","Boulevard Poniatowski","Boulevard Soult","Boulevard des Capucines","Boulevard de la Chapelle","Boulevard de Clichy","Boulevard du Crime",
+    "Boulevard du Général-d'Armée-Jean-Simon","Boulevard Haussmann","Boulevard de l'Hôpital","Boulevard des Italiens","Boulevard Lefebvre","Boulevard de la Madeleine",
+    "Boulevard de Magenta","Boulevard Malesherbes","Boulevard Marguerite-de-Rochechouart","Boulevard Montmartre","Boulevard du Montparnasse","Boulevard Raspail",
+    "Boulevard Richard-Lenoir","Boulevard Saint-Germain","Boulevard Saint-Michel","Boulevard de Sébastopol","Boulevard de Strasbourg","Boulevard du Temple","Boulevard Voltaire",
+    "Boulevard Hippolyte-Marquès"];
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let inventorsBornIn = inventors.filter((item) => {
+      if(item.year >= 1500 && item.year <= 1600)
+        return item
+    })
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    let firstAndLastName = inventors.map((item) => `First : ${item.first}, Last : ${item.last}`)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    let sortInvestorByAge = inventors.sort((a,b) => a.year - b.year)
+    
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+      let totalAgeOfInvestors = inventors.reduce(function (acc,obj) {
+            let age = obj.passed - obj.year
+            acc += age 
+          return acc
+      },0)
 
     // 5. Sort the inventors by years lived
+    let sortByYearsLived = inventors.sort((firstInvestor,secondInvestor) => {
+          let ageOfFirstInvestor = firstInvestor.passed - firstInvestor.year
+          let ageOfSecondInvestor = secondInvestor.passed - secondInvestor.year
+          return ageOfFirstInvestor - ageOfSecondInvestor
+    })
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    let arrayOfBoulevardsWithDe = boulevards.filter((item) => item.includes("de")
+    ) 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    let sortByLastName = inventors.sort((a,b) => {
+      if(a.last < b.last)
+        return -1
+      if(a.last > b.last)
+        return 1
+      return 0
+    })
+  
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    let vehicleInstanceObject = {}
+      for(let vehicle of data){
+        if(vehicle in vehicleInstanceObject)
+          vehicleInstanceObject[vehicle] += 1
+        else{
+          vehicleInstanceObject[vehicle] = 1
+        } 
+      }
 
+      let vehicleInstance = data.reduce(function (acc,arr){
+          if(!(arr in acc)) acc[arr] = 1
+          else acc[arr] += 1
+          return acc
+      },{})
+    
   </script>
 </body>
 </html>
